@@ -3,7 +3,7 @@ import matplotlib.pyplot as plot
 from mpl_toolkits import mplot3d
 import numpy as np
 
-# dataset
+# parse data
 Stock_Market = {'Year': [2017,2017,2017,2017,2017,2017,2017,2017,2017,2017,2017,2017,2016,2016,2016,2016,2016,2016,2016,2016,2016,2016,2016,2016],
                 'Month': [12, 11,10,9,8,7,6,5,4,3,2,1,12,11,10,9,8,7,6,5,4,3,2,1],
                 'Interest_Rate': [2.75,2.5,2.5,2.5,2.5,2.5,2.5,2.25,2.25,2.25,2,2,2,1.75,1.75,1.75,1.75,1.75,1.75,1.75,1.75,1.75,1.75,1.75],
@@ -22,22 +22,28 @@ epochs = 1000
 def descend(iterations, learning_rate):
     m, n, b = 0, 0, 0
     count = float(len(X))
+    # steps
     for i in range(iterations):
+        # get predicted SIP's to calculate error for this step
         pred = m*X + n*Y + b
+        # take partial derivatives wrt m, n, b of least-squared error cost function
         d_wrt_m = (-2/count) * sum((X) * (Z - pred))
         d_wrt_n = (-2/count) * sum((Y) * (Z - pred))
         d_wrt_b = (-2/count) * sum(Z - pred)
+        # update parameters to "descend" to lower error in next step
         m -= learning_rate * d_wrt_m
         n -= learning_rate * d_wrt_n
         b -= learning_rate * d_wrt_b
-    print(m, n, b)
     return m, n, b
 
 # calculate optimal parameters
 m, n, b = descend(epochs, learning_rate)
+print("-----------------", "\nInterest Rate Coefficient (I): ", m, "\nUnemployment Rate Coefficient (U): ", n, "\nIntercept: ", b)
+print("-----------------", "\nStock Index Price = " + str(round(m, 3)) + "I + " + str(round(n, 3)) + "U + " + str(round(b, 3)))
 
 # setup plot
 fig = plot.figure()
+fig.suptitle("Stock Index Price vs. [Interest Rate & Unemployment Rate]", fontsize=13, color="blue")
 ax = fig.gca(projection='3d')
 ax.set_xlabel("Interest Rate")
 ax.set_ylabel("Unemployment Rate")
@@ -51,6 +57,5 @@ Z_s = m*X_s + n*Y_s + b
 ax.plot_surface(X_s, Y_s, Z_s, alpha=0.5, color="red")
 
 # plot real points
-Z_pred = m*X + n*Y + b
 ax.scatter3D(X, Y, Z, marker='.', color="blue");
 plot.show()
