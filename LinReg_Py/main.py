@@ -4,7 +4,7 @@ from mpl_toolkits import mplot3d
 import numpy as np
 
 # parse data
-data = panda.read_csv('salaries-by-college-type.csv')
+data = panda.read_csv('college_data.csv')
 X = data.loc[:, 'Acceptance Rate']
 Y = data.loc[:, 'Yield Rate']
 Z = data.loc[:, 'Starting Median Salary']
@@ -33,8 +33,8 @@ def descend(iterations, learning_rate):
 
 # calculate optimal parameters
 m, n, b = descend(epochs, learning_rate)
-print("-----------------", "\nAcceptance Rate Coefficient (I): ", m, "\Yield Rate Coefficient (U): ", n, "\nIntercept: ", b)
-print("-----------------", "\nStarting Median Salary = " + str(round(m, 3)) + "I + " + str(round(n, 3)) + "U + " + str(round(b, 3)))
+print("-----------------", "\nAcceptance Rate Coefficient (A): ", m, "\Yield Rate Coefficient (Y): ", n, "\nIntercept: ", b)
+print("-----------------", "\nStarting Median Salary = " + str(round(m, 3)) + "A + " + str(round(n, 3)) + "Y + " + str(round(b, 3)))
 
 # setup plot
 fig = plot.figure()
