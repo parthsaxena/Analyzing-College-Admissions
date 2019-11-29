@@ -1,16 +1,21 @@
 import pandas as panda
-import matplotlib.pyplot as plot
+import matplotlib.pyplot as plot, mpld3
 from mpl_toolkits import mplot3d
 import numpy as np
 
 # parse data
-data = panda.read_csv('college_data.csv')
+data = panda.read_csv('dataset/college_data.csv')
+test_data = panda.read_csv('dataset/test_college_data.csv')
 X = data.loc[:, 'Acceptance Rate']
 Y = data.loc[:, 'Yield Rate']
 Z = data.loc[:, 'Starting Median Salary']
 
+X_test = test_data.loc[:, 'Acceptance Rate']
+Y_test = test_data.loc[:, 'Yield Rate']
+Z_test = test_data.loc[:, 'Starting Median Salary']
+
 # configuration
-learning_rate = 0.00001
+learning_rate = 0.0001
 epochs = 1000
 
 def descend(iterations, learning_rate):
@@ -31,10 +36,18 @@ def descend(iterations, learning_rate):
         b -= learning_rate * d_wrt_b
     return m, n, b
 
+def calculate_error(m, n, b):
+    count = float(len(X_test))
+    print("-----------------", "\nProvided " + str(count) + " Test Samples")
+    pred = m*X_test + n*Y_test + b
+    mpe = sum((abs(pred - Z_test))/Z_test) / count
+    return mpe * 100
+
 # calculate optimal parameters
 m, n, b = descend(epochs, learning_rate)
 print("-----------------", "\nAcceptance Rate Coefficient (A): ", m, "\Yield Rate Coefficient (Y): ", n, "\nIntercept: ", b)
 print("-----------------", "\nStarting Median Salary = " + str(round(m, 3)) + "A + " + str(round(n, 3)) + "Y + " + str(round(b, 3)))
+print("Error: " + str(round(calculate_error(m, n, b), 2)) + "%")
 
 # setup plot
 fig = plot.figure()
@@ -49,7 +62,7 @@ x_s = np.linspace(min(X),max(X),10)
 y_s = np.linspace(min(Y),max(Y),10)
 X_s,Y_s = np.meshgrid(x_s,y_s)
 Z_s = m*X_s + n*Y_s + b
-ax.plot_surface(X_s, Y_s, Z_s, alpha=0.5, color="red")
+ax.plot_surface(X_s, Y_s, Z_s, alpha=0.75, color="red")
 
 # plot real points
 ax.scatter3D(X, Y, Z, marker='.', color="blue");
