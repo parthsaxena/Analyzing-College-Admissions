@@ -39,6 +39,7 @@ def descend(iterations, learning_rate):
 def calculate_error(m, n, b):
     count = float(len(X_test))
     print("-----------------", "\nProvided " + str(count) + " Test Samples")
+    #print("Provided " + str(count) + " Test Samples")
     pred = m*X_test + n*Y_test + b
     mpe = sum((abs(pred - Z_test))/Z_test) / count
     return mpe * 100
