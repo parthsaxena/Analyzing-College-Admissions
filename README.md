@@ -10,7 +10,7 @@ We model the starting median salary of a university's graduates based on accepta
 `pandas`
 
 ## Logistic Regression
-We predict a student's chances of being accepted to a number of university's based on SAT and GPA. 
+We predict a student's chances of being accepted to several universities based on SAT and GPA. 
 
 ### Dependencies
 `numpy`
