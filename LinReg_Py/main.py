@@ -44,9 +44,9 @@ def calculate_error(m, n, b):
     mpe = sum((abs(pred - Z_test))/Z_test) / count
     return mpe * 100
 
-# calculate optimal parameters
+# get optimal parameters
 m, n, b = descend(epochs, learning_rate)
-print("-----------------", "\nAcceptance Rate Coefficient (A): ", m, "\Yield Rate Coefficient (Y): ", n, "\nIntercept: ", b)
+print("-----------------", "\nAcceptance Rate Coefficient (A): ", m, "\nYield Rate Coefficient (Y): ", n, "\nIntercept: ", b)
 print("-----------------", "\nStarting Median Salary = " + str(round(m, 3)) + "A + " + str(round(n, 3)) + "Y + " + str(round(b, 3)))
 print("Error: " + str(round(calculate_error(m, n, b), 2)) + "%")
 
