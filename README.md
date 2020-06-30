@@ -1,7 +1,5 @@
 # Machine Learning in College Admissions
 
-MVC Project Semester 1 by Parth Saxena and Arnav Garg
-
 ## Linear Regression
 We model the starting median salary of a university's graduates based on acceptance and yield rates.
 
