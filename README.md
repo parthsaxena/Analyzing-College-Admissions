@@ -1,7 +1,7 @@
 # Machine Learning to Analyze College Admissions
 
 ### About
-A data-driven approach to analyze conventional wisdom on college admissions. Check out our [paper](http://parthsaxena.com/docs/Analyzing+College+Admissions.pdf) to get an in-depth view of our method and findings.
+A data-driven approach to analyze conventional wisdom on college admissions. Check out our [paper](http://parthsaxena.com/docs/Analyzing-College-Admissions) to get an in-depth view of our method and findings.
 
 ### Linear Regression
 We model the starting median salary of a university's graduates based on acceptance and yield rates.
